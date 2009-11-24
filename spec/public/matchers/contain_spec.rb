@@ -111,4 +111,19 @@ describe "contain" do
       hc.failure_message.should include("hello, world!")
     end
   end
+
+  it "should look at all the mathching scopes" do
+    with_html <<-HTML
+      <html>
+        <div class="comments">
+          <div class="comment">hello</div>
+          <div class="comment">world!</div>
+        </div>
+      </html>
+    HTML
+
+    within ".comment" do |scope|
+      scope.should contain('world!')
+    end
+  end
 end
